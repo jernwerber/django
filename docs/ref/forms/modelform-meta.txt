@@ -129,6 +129,15 @@ When used, it isn't necessary for every included model field to appear in each d
 
     :attr:`~django.forms.ModelFormOptions.field_classes` can be used to set or override whatever :class:`django.forms.Field` type may have already been set for a field, such as the default :class:`django.forms.Field` type for a given :class:`django.db.models.Field` type.
 
+    The :class:`~django.forms.Field` specified in :attr:`~django.forms.ModelFormOptions.field_classes` (the 'new field') gets passed all the arguments that would otherwise have been used for that model's field (the 'old field'). If the old field has different attributes (and therefore different arguments) than the new field, a :exc:`TypeError` may be raised. For example:
+    
+    - Replacing a :class:`~django.forms.CharField` with an :class:`~django.forms.EmailField` will work, since the latter is a subclass of the former and can handle all the arguments passed to it.
+    - Replacing a :class:`~django.forms.CharField` with an :class:`~django.forms.IntegerField`, however, will **not** work, since the :class:`~django.forms.CharField` would pass a :attr:`~django.forms.CharField.max_length` argument, and the :class:`~django.forms.IntegerField` cannot accept such an argument (it instead has :attr:`~django.forms.IntegerField.max_value`). In this case, a :exc:`TypeError` will be raised with the message: 
+    
+        .. code-block:: pycon
+
+            >>> TypeError: Field.__init__() got an unexpected keyword argument 'max_length'
+
 .. currentmodule:: django.forms
 
 ``formfield_callback``
