@@ -177,9 +177,9 @@ When used, it isn't necessary for every included model field to appear in each d
 
     Expects a tuple of strings or a list of strings that are field names.
     
-    The fields included in this list will have their data localized (by default, the form fields output by a :class:`~django.forms.ModelForm` are **not** localized, see :doc:`Enabling localization of fields in Creating forms from models </topics/forms/modelforms>`).  
+    The fields included in this list will have their data localized (by default, the form fields output by a :class:`~django.forms.ModelForm` are **not** localized, see :ref:`Creating forms from models: Enabling localization of fields <modelforms-enabling-localization-of-fields>`).  
     
-    Like :attr:`~ModelFormOptions.fields`, Can be set to the special string ``'__all__'`` to include all fields.
+    Like :attr:`~ModelFormOptions.fields`, :attr:`~ModelFormOptions.localized_fields` can be set to the special string ``'__all__'`` to include all fields.
 
 ``widgets``
 -----------
